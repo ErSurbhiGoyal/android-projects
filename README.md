@@ -1,7 +1,10 @@
 # android-projects
 
-SQLite is a opensource SQL database that stores data to a text file on a device. Android comes in with built in SQLite database implementation.
+This repository includes some Demo projects that will help beginners to learn basic android libraries and functionalities.
+These basic libraries include:-
 
-SQLite supports all the relational database features. In order to access this database, you don't need to establish any kind of connections for it like JDBC,ODBC e.t.c
+SQLite
+Intent
+ButterKnife
+and many more...
 
-The main package is android.database.sqlite that contains the classes to manage your own databases.
