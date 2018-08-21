@@ -18,7 +18,8 @@ public class DBHelperSelect extends DBHelper {
         super(context);
     }
 
-    public List<Book> getBookList() {
+    public List<String> getBookList() {
+        List<String> list = new ArrayList<>();
         List<Book> bookList = new ArrayList<Book>();
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "Select * From BookDetail";
@@ -28,11 +29,12 @@ public class DBHelperSelect extends DBHelper {
             cursor = db.rawQuery(query, null);
             if (cursor.moveToFirst()) {
                 do {
-                    book = new Book();
+                    /*book = new Book();
                     book.setTitle(cursor.getString(0));
                     book.setAuthor(cursor.getString(1));
-                    book.setCreatedDate(getCurrentDateNTime());
-                    bookList.add(book);
+                    book.setCreatedDate(cursor.getString(2));
+                    bookList.add(book);*/
+                    list.add(cursor.getString(1));
                 } while (cursor.moveToNext());
                 cursor.close();
                 db.close();
@@ -42,18 +44,10 @@ public class DBHelperSelect extends DBHelper {
             db.close();
             Log.e("error  ", e.getMessage());
         }
-        return bookList;
+        //return bookList;
+        return list;
     }
 
-    public String getCurrentDateNTime(){
-        String date="";
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-            LocalDateTime now = LocalDateTime.now();
-            date = dtf.format(now);
-        }
 
-        return date;
-    }
 
 }

@@ -7,6 +7,9 @@ import android.util.Log;
 
 import com.suroid.android_sqlite.model.Book;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class DBHelperInsert extends DBHelper {
 
     public DBHelperInsert(Context context) {
@@ -19,11 +22,11 @@ public class DBHelperInsert extends DBHelper {
         try {
             ContentValues values = new ContentValues();
             db.beginTransaction();
-            values.put(Key_BookId, book.getId());
+            /*values.put(Key_BookId, book.getId());*/
             values.put(BookName, book.getTitle());
             values.put(BookAuthor, book.getAuthor());
-            values.put(CreatedDate_Book, book.getCreatedDate());
-            db.insert(BookMaster, null, values);
+            values.put(CreatedDate_Book, getCurrentDateNTime());
+            long i = db.insert(BookMaster, null, values);
 
             db.setTransactionSuccessful();
             db.endTransaction();
@@ -34,5 +37,16 @@ public class DBHelperInsert extends DBHelper {
             Log.e("Error ", e.getMessage());
         }
     }
+    public String getCurrentDateNTime(){
+        String date="";
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            date = dtf.format(now);
+        }
+
+        return date;
+    }
+
 
 }

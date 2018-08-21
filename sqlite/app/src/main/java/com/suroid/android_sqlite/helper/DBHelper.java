@@ -47,6 +47,36 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         onCreate(db);
     }
+
+    public void dropTable(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        try {
+            db.beginTransaction();
+            db.execSQL("DROP TABLE IF EXISTS '" + BookMaster + "'");
+            db.setTransactionSuccessful();
+            db.endTransaction();
+            db.close();
+        } catch (Exception e) {
+            db.endTransaction();
+            db.close();
+            Log.e("Error ", e.getMessage());
+        }
+    }
+
+    public void truncateTable(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        try {
+            db.beginTransaction();
+            db.execSQL("delete from " + BookMaster);
+            db.setTransactionSuccessful();
+            db.endTransaction();
+            db.close();
+        } catch (Exception e) {
+            db.endTransaction();
+            db.close();
+            Log.e("Error ", e.getMessage());
+        }
+    }
 }
 
 

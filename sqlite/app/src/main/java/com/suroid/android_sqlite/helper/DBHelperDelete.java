@@ -14,15 +14,18 @@ public class DBHelperDelete extends DBHelper {
     }
 
     // function to insert record into BookDetail table
-    public void deleteRecordFromBookMaster(Book book) {
+    public void deleteRecordFromBookMaster(String bookName) {
         SQLiteDatabase db = this.getWritableDatabase();
         try {
             db.beginTransaction();
 
-            db.delete(BookMaster,
+           /* db.delete(BookMaster,
                     Key_BookId + " = ?",
-                    new String[]{String.valueOf(book.getId())});
+                    new String[]{String.valueOf(book.getId())});*/
 
+            db.delete(BookMaster,
+                    BookName + " = ?",
+                    new String[]{bookName});
             db.setTransactionSuccessful();
             db.endTransaction();
             db.close();
