@@ -1,46 +1,35 @@
 package com.suroid.android_sqlite;
 
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-import com.suroid.android_sqlite.helper.DBHelper;
+import com.suroid.android_sqlite.helper.DBHelperDelete;
 import com.suroid.android_sqlite.helper.DBHelperInsert;
+import com.suroid.android_sqlite.helper.DBHelperSelect;
 import com.suroid.android_sqlite.model.Book;
 
 import java.util.List;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-
 public class MainActivity extends AppCompatActivity {
-
-    @InjectView(R.id.fab) FloatingActionButton floatingActionButton ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ButterKnife.inject(this);
-
-       /* // get all books
-        List<Book> list = db.getAllBooks();
-
-        // delete one book
-        db.deleteBook(list.get(0));
-
-        // get all books
-        db.getAllBooks();*/
-
-    }
-
-    public void addBook(){
         DBHelperInsert dbInsert = new DBHelperInsert(this);
+        DBHelperSelect dbSelect = new DBHelperSelect(this);
+        DBHelperDelete dbDelete = new DBHelperDelete(this);
+        // get all books
+        List<Book> list = dbSelect.getBookList();
+        // delete one book
+        dbDelete.deleteRecordFromBookMaster(list.get(0));
 
-        dbInsert.addBook(new Book("Android Application Development Cookbook", "Wei Meng Lee"));
-        dbInsert.addBook(new Book("Android Programming: The Big Nerd Ranch Guide", "Bill Phillips and Brian Hardy"));
-        dbInsert.addBook(new Book("Learn Android App Development", "Wallace Jackson"));
+        dbInsert.addBook(new Book("SQL Antipatterns (Paperback)", "Bill Karwin"));
+        dbInsert.addBook(new Book("An Introduction to Database Systems (Paperback)", "C.J. Date"));
+        dbInsert.addBook(new Book("Elasticsearch in Action (ebook)", "Matthew Lee Hinman"));
+        dbInsert.addBook(new Book("Beginning Android Games", " Mario Zechner"));
+        dbInsert.addBook(new Book("Android Recipes: A Problem-Solution Approach", "Dave Smith & Jeff Friesen"));
     }
 
 }

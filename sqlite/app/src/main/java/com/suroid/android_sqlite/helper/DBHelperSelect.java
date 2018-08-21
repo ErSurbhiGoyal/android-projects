@@ -18,7 +18,7 @@ public class DBHelperSelect extends DBHelper {
         super(context);
     }
 
-    public List<Book> getMainCategoryList() {
+    public List<Book> getBookList() {
         List<Book> bookList = new ArrayList<Book>();
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "Select * From BookDetail";
