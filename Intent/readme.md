@@ -34,18 +34,20 @@ Example:- If you want to open gallery in your app. You can use the following cod
 You can use the following code to get image
 
     public void onActivityResult(int requestCode, int resultCode, Intent data){
-    super.onActivityResult(requestCode, resultCode, data);
-    if (requestCode == SELECT_IMAGE){
-        if (resultCode == Activity.RESULT_OK){
-            if (data != null){
-                try{
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
-                } catch (IOException e){
-                    e.printStackTrace();
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SELECT_IMAGE){
+            if (resultCode == Activity.RESULT_OK){
+                if (data != null){
+                    try{
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+                    } catch (IOException e){
+                        e.printStackTrace();
+                    }
                 }
+            } else if (resultCode == Activity.RESULT_CANCELED){
+                Toast.makeText(getActivity(), "Cancelled", Toast.LENGTH_SHORT).show();
             }
-        } else if (resultCode == Activity.RESULT_CANCELED){
-            Toast.makeText(getActivity(), "Cancelled", Toast.LENGTH_SHORT).show();
         }
     }
-}
+    
+    
