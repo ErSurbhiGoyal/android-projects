@@ -10,8 +10,8 @@ These use cases will be discussed later on. Let's now discuss different types of
 Types of Intents:-
 
 There are basically two types of intents:-
-1. Explicit Intent
-2. Implicit Intent
+    1. Explicit Intent
+    2. Implicit Intent
 
 1. Explicit Intent:- An explicit intent is one that you use to launch a specific app component, such as a particular activity or service in your app. To create an explicit intent, define the component name for the Intent object—all other intent properties are optional.
 
