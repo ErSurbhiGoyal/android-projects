@@ -9,8 +9,6 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-
         //TODO: Do whatever task you want to do on this new activity
-
     }
 }
