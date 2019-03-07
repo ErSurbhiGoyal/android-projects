@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int RESULT_LOAD_IMAGE = 1;
     private static final int requestPermissionCode = 999;
     private static boolean permissionGranted = false;
-    public static final String EXTRA_MESSAGE ="MESSAGE";
 
     @InjectView(R.id.btnExplicit)
     Button explicitIntent;
@@ -43,9 +42,6 @@ public class MainActivity extends AppCompatActivity {
     @InjectView(R.id.btnSendData)
     Button btnSendData;
 
-    @InjectView(R.id.edtEnterMessage)
-    EditText edtEnterMessage;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,9 +50,9 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.inject(this);
     }
 
-    public void getPermission(){
+    public void getPermission() {
         ActivityCompat.requestPermissions(MainActivity.this,
-                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                 requestPermissionCode);
     }
 
@@ -67,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < permissions.length; i++) {
                 if (grantResults[i] != 0) {
                     /*Log.e(TAG, "Permission Denied for " + permissions[i]);*/
-                    Toast.makeText(MainActivity.this,"Please grant all permissions",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Please grant all permissions", Toast.LENGTH_SHORT).show();
                     permissionGranted = false;
                     break;
                 }
@@ -79,46 +75,43 @@ public class MainActivity extends AppCompatActivity {
 
     //We need not to call this. Butterknife library will automatically detect this function on button click
     //You can also use onClickListener if you want.
-    @OnClick({R.id.btnExplicit,R.id.btnImplicit,R.id.btnSendData})
-    public void clickListener(View view){
-        switch(view.getId()) {
+    @OnClick({R.id.btnExplicit, R.id.btnImplicit, R.id.btnSendData})
+    public void clickListener(View view) {
+        switch (view.getId()) {
             case R.id.btnExplicit:
                 clickExplicit();
                 break;
             case R.id.btnImplicit:
-                if(permissionGranted){
-                clickImplicit();}else{
-                    Toast.makeText(MainActivity.this,"First grant the permission to access the storage",Toast.LENGTH_SHORT).show();
+                if (permissionGranted) {
+                    clickImplicit();
+                } else {
+                    Toast.makeText(MainActivity.this, "First grant the permission to access the storage", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.btnSendData:
-                if(edtEnterMessage.getText()!=null || !edtEnterMessage.equals("")) {
-                    sendData();
-                }
+                sendData();
                 break;
         }
     }
 
-    public void clickExplicit(){
-        Toast.makeText(this,"This will land you on new activity",Toast.LENGTH_SHORT).show();
+    public void clickExplicit() {
+        Toast.makeText(this, "This will land you on new activity", Toast.LENGTH_SHORT).show();
         //This is the way of initiating a new activity from one activity.
-        Intent intent  = new Intent(this, SecondActivity.class);
+        Intent intent = new Intent(this, SecondActivity.class);
         startActivity(intent);
         //If you don't want the user to open this activity again you can kill or destroy this activity using finish function.
         //finish();
     }
 
-    public void clickImplicit(){
-        Toast.makeText(this,"This will open Gallery for you",Toast.LENGTH_SHORT).show();
+    public void clickImplicit() {
+        Toast.makeText(this, "This will open Gallery for you", Toast.LENGTH_SHORT).show();
         //This is the way of initiating a new activity from one activity.
-        Intent intent = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, RESULT_LOAD_IMAGE);
     }
 
-    public void sendData(){
-        Intent intent = new Intent(this, SecondActivity.class);
-        String message = edtEnterMessage.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
+    public void sendData() {
+        Intent intent = new Intent(this, SendDataActivityOne.class);
         startActivity(intent);
     }
 
@@ -144,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                     Drawable drawable = new BitmapDrawable(bitmap);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                         imageView.setBackground(drawable);
-                    }else{
+                    } else {
                         imageView.setImageBitmap(bitmap);
                     }
                 }

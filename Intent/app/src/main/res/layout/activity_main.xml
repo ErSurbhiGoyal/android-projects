@@ -32,25 +32,12 @@
         android:layout_marginTop="16dp"
         android:layout_centerHorizontal="true"/>
 
-    <EditText
-        android:id="@+id/edtEnterMessage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Enter message"
-        android:maxLength="20"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:textAlignment="center"
-        android:layout_below="@+id/btnImplicit"
-        android:layout_marginTop="16dp"
-        android:layout_centerHorizontal="true"/>
-
     <Button
         android:id="@+id/btnSendData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Send Data"
-        android:layout_below="@+id/edtEnterMessage"
+        android:layout_below="@+id/btnImplicit"
         android:layout_marginTop="16dp"
         android:layout_centerHorizontal="true" />
 

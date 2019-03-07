@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Intent</string>
+    <string name="text_header">Message Received</string>
+    <string name="button_second">Reply</string>
+    <string name="editText_second">Enter your reply here</string>
+    <string name="button_main">Send</string>
+    <string name="editText_main">Enter your message here</string>
+    <string name="text_header_reply">Reply received</string>
 </resources>
