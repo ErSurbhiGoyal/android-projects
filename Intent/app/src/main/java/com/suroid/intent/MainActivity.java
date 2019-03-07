@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int RESULT_LOAD_IMAGE = 1;
     private static final int requestPermissionCode = 999;
     private static boolean permissionGranted = false;
+    public static final String EXTRA_MESSAGE ="MESSAGE";
 
     @InjectView(R.id.btnExplicit)
     Button explicitIntent;
@@ -37,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
 
     @InjectView(R.id.imageView)
     ImageView imageView;
+
+    @InjectView(R.id.btnSendData)
+    Button btnSendData;
+
+    @InjectView(R.id.edtEnterMessage)
+    EditText edtEnterMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
     //We need not to call this. Butterknife library will automatically detect this function on button click
     //You can also use onClickListener if you want.
-    @OnClick({R.id.btnExplicit,R.id.btnImplicit})
+    @OnClick({R.id.btnExplicit,R.id.btnImplicit,R.id.btnSendData})
     public void clickListener(View view){
         switch(view.getId()) {
             case R.id.btnExplicit:
@@ -83,6 +91,11 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this,"First grant the permission to access the storage",Toast.LENGTH_SHORT).show();
                 }
                 break;
+            case R.id.btnSendData:
+                if(edtEnterMessage.getText()!=null || !edtEnterMessage.equals("")) {
+                    sendData();
+                }
+                break;
         }
     }
 
@@ -92,14 +105,21 @@ public class MainActivity extends AppCompatActivity {
         Intent intent  = new Intent(this, SecondActivity.class);
         startActivity(intent);
         //If you don't want the user to open this activity again you can kill or destroy this activity using finish function.
-        finish();
+        //finish();
     }
 
     public void clickImplicit(){
         Toast.makeText(this,"This will open Gallery for you",Toast.LENGTH_SHORT).show();
         //This is the way of initiating a new activity from one activity.
-        Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(i, RESULT_LOAD_IMAGE);
+        Intent intent = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, RESULT_LOAD_IMAGE);
+    }
+
+    public void sendData(){
+        Intent intent = new Intent(this, SecondActivity.class);
+        String message = edtEnterMessage.getText().toString();
+        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
     }
 
     @Override
