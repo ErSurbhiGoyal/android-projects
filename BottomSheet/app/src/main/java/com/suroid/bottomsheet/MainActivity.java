@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 View dialogView = getLayoutInflater().inflate(R.layout.modal_bottom_sheet, null);
                 BottomSheetDialog dialog = new BottomSheetDialog(MainActivity.this);
                 dialog.setContentView(dialogView);
+                dialog.findViewById(R.id.btn_open_profile).setVisibility(View.GONE);
                 dialog.show();
             }
         });
